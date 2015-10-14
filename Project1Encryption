@@ -1,1 +1,76 @@
+public class Encrypt 
+{
+	
+	/**
+	 * Encrypts message by changing the letters, or summat
+	 * @param blah
+	 * @return returns a string with letters of the alphabet offset by 5. 
+	 */
+	public static String encryptString(String toEncrypt)
+	{
+		char[] blahBlah = toEncrypt.toCharArray();
+		for (int i = 0; i < blahBlah.length; i++)
+		{
+			//toEncrypt[i] = (char)(65 + ((i+5)%26));
+			if ((blahBlah[i] < 91 && blahBlah[i] > 64))
+			{
+				blahBlah[i] = (char)(65 + ((blahBlah[i] - 60) % 26));
+			}
+			else if (blahBlah[i] > 96 && blahBlah[i] < 123)
+			{
+				blahBlah[i] = (char)(97 + ((blahBlah[i] - 92) % 26));
+			}
+		}
+		toEncrypt = new String(blahBlah);
+		System.out.println(toEncrypt);
+		return toEncrypt;
+	}
+	
+	/**
+	 * 
+	 * @param replaceText
+	 * @param offset offset = 1 means A becomes B. offset = -1 returns the same as offset = 25.
+	 * @return
+	 */
+	public static String encryptString(String toEncrypt, int offset)
+	{
+		if (offset % 26 < 0)
+		{
+			offset = 26 + offset%26;
+		}
+		
+		char[] blahBlah = toEncrypt.toCharArray();
+		
+		for (int i = 0; i < blahBlah.length; i++)
+		{
+			//blah[i] = (char)(65 + ((i+5)%26));
+			
+			/*if ((blahBlah[i] < 91 && blahBlah[i] > 64))
+			{
+				blahBlah[i] = (char)(65 + ((blahBlah[i] - (65 - offset%26)) % 26));
+			}
+			
+			else if (blahBlah[i] > 96 && blahBlah[i] < 123)
+			{
+				blahBlah[i] = (char)(97 + ((blahBlah[i] - (97 - offset%26)) % 26));
+			}*/
+			
+			if ((blahBlah[i] <= 'Z' && blahBlah[i] >= 'A'))
+			{
+				blahBlah[i] = (char)('A' + ((blahBlah[i] - ('A' - offset)) % 26));
+			}
+			
+			//65 - 135 = -70... Assume blahBlah[i] is 'D'. 68 -- 70 = 68 + 70 = 138... 138 % 26 = 8... 8 + 65 = 73 = 'I'
+			
+			//simple way of looking at it is that there are two offsets. D - A = 3... offset 135 + 3 = 138. 138 % 26 = 8
+			
+			else if (blahBlah[i] >= 'a' && blahBlah[i] <= 'z')
+			{
+				blahBlah[i] = (char)('a' + ((blahBlah[i] - ('a' - offset)) % 26));
+			}
+		}
+		toEncrypt = new String(blahBlah);
+		return toEncrypt;
+	}
+}
 
